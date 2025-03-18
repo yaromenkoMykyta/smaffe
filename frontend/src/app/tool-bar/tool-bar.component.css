@@ -1,0 +1,18 @@
+main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1%;
+}
+.action{
+  border: solid #333333 1px;
+  background-color: transparent;
+  padding: 1%;
+  border-radius: 3px;
+  margin-left: 3%;
+}
+.action:hover{
+  background: #333333;
+  color: #FAFAFA;
+  transition: 500ms;
+}
