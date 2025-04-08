@@ -24,4 +24,4 @@ jobs:
 
     - name: Run Pylint on backend
       run: |
-        PYTHONPATH=. pylint backend/
+        PYTHONPATH=. pylint backend/ --fail-under=8.5
