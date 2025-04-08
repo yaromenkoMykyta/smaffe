@@ -1,4 +1,4 @@
-name: Pylint Check
+name: pylint
 
 on: [push, pull_request]
 
