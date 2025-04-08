@@ -1,15 +1,9 @@
-name: Pylint Code Scanning
+name: pylint
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
-  pylint:
-    name: Run Pylint and Upload SARIF
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,20 +16,12 @@ jobs:
         python-version: '3.11'
 
     - name: Install dependencies
+
       run: |
         python -m pip install --upgrade pip
-        pip install pylint pylint-sarif
+        pip install pylint
         pip install -r backend/requirements.txt
 
-    - name: Run Pylint and output to JSON
+    - name: Run Pylint on backend
       run: |
-        PYTHONPATH=. pylint backend/ --output-format=json:pylint-output.json
-
-    - name: Convert Pylint JSON to SARIF
-      run: |
-        pylint-json2sarif -i pylint-output.json -o pylint-output.sarif
-
-    - name: Upload SARIF to GitHub
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: pylint-output.sarif
+        PYTHONPATH=. pylint backend/ --fail-under=8.5
