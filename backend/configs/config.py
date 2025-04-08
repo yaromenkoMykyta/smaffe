@@ -34,9 +34,9 @@ _global_config: Optional[GlobalConfig] = None
 
 def load_config() -> GlobalConfig:
     """
-    load default config. returns the global config;
+    load the config data and return GlobalConfig object
 
-    :return: global config with the data from yaml
+    :return: GlobalConfig object
     """
     global _global_config
     logger = get_logger(__name__)

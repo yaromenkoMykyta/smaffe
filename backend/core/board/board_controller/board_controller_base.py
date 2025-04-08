@@ -16,5 +16,12 @@ class BoardControllerBase(ABC):
         pass
 
     @abstractmethod
-    def set_output_high(self, output: OutputsBoard):
+    def set_output_high(self, output: OutputsBoard) -> None:
+        """
+        Abstract method to set up some output of the board to the HIGH value
+
+        :param output: output pin
+
+        :return: None
+        """
         pass

@@ -24,6 +24,12 @@ class BoardControllerRaspberry(BoardControllerBase):
         GPIO.cleanup()
 
     def set_output_high(self, output: OutputsBoard):
+        """
+
+        :param output: the output pin on the board
+
+        :return: None
+        """
         if output == OutputsBoard.Cream:
             GPIO.output(self.config.output_cream, GPIO.HIGH)
         elif output == OutputsBoard.Espresso:

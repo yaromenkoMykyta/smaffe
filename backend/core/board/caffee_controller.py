@@ -9,6 +9,9 @@ logger = get_logger(__name__)
 
 
 def make_espresso():
+    """
+    calls to the board to set the necessary output for the making of the espresso to high
+    """
     cfg = load_config()
     with BoardControllerRaspberry(cfg.board_config) as board:
         board.set_output_high(OutputsBoard.Espresso)
@@ -16,6 +19,11 @@ def make_espresso():
 
 
 def make_cream_caffe():
+    """
+    calls to the board to set the necessary output for the making of the cream caffe to high
+
+    :returns: None
+    """
     cfg = load_config()
     board = BoardControllerRaspberry(cfg.board_config)
     with board:

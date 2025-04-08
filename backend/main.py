@@ -7,6 +7,11 @@ from configs.config import load_config
 
 
 def run_api():
+    """
+    initialize the FASTAPI server, with adding the specified parameters, and runs the api
+
+    :returns: None
+    """
     app = FastAPI()
     api_config = load_config().api
     app_router = APIRouter()
@@ -26,4 +31,5 @@ def run_api():
     uvicorn.run(app, host=api_config.host, port=api_config.port)
 
 
-run_api()
+if __name__ == "__main__":
+    run_api()
