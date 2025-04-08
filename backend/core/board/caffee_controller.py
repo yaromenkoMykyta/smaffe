@@ -1,23 +1,45 @@
-from backend.tools.logger import get_logger
-from backend.configs.config import load_config
+"""
+This module provides functions to control the preparation of espresso and cream caffe.
+
+It utilizes the `BoardControllerRaspberry` class to manage GPIO pins for controlling
+the outputs of the board. The module includes functions to prepare espresso and cream
+caffe by setting the respective output pins to HIGH.
+"""
+
+from backend.tools.logger import Logger
+from backend.configs.config import ConfigLoader
 from backend.core.board.board_controller.board_controller_raspberry import (
     BoardControllerRaspberry,
 )
 from backend.core.board.board_controller.dataclasses import OutputsBoard
 
-logger = get_logger(__name__)
+# Initialize a logger for the module
+LOGGER = Logger.get_logger(__name__)
+CONFIG = ConfigLoader.load_config()
 
 
 def make_espresso():
-    cfg = load_config()
-    with BoardControllerRaspberry(cfg.board_config) as board:
-        board.set_output_high(OutputsBoard.Espresso)
-    logger.info("started make caffe espresso")
+    """
+    Prepares an espresso by setting the corresponding output pin to HIGH.
+
+    :return: None
+    """
+    board_config = CONFIG.board_config  # Load the configuration for the board
+    with BoardControllerRaspberry(board_config) as board:
+        board.set_output_high(OutputsBoard.ESPRESSO)  # Set the espresso output to HIGH
+    LOGGER.info("started make caffe espresso")  # Log the action
 
 
 def make_cream_caffe():
-    cfg = load_config()
-    board = BoardControllerRaspberry(cfg.board_config)
+    """
+    Prepares a cream caffe by setting the corresponding output pin to HIGH.
+
+    :return: None
+    """
+    board_config = CONFIG.board_config  # Load the configuration for the board
+
+    board = BoardControllerRaspberry(board_config)  # Initialize the board controller
+
     with board:
-        board.set_output_high(OutputsBoard.Cream)
-    logger.info("started make cream caffe")
+        board.set_output_high(OutputsBoard.CREAM)  # Set the cream caffe output to HIGH
+    LOGGER.info("started make cream caffe")  # Log the action
