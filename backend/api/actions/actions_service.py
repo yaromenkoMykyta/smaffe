@@ -1,4 +1,4 @@
-import backend.core.board_controll.caffee_controller as caffe_controller
+import backend.core.board.caffee_controller as caffe_controller
 
 
 def make_espresso():

@@ -6,3 +6,7 @@ api:
 
 logger:
   logging_level: 1
+
+board_config:
+  output_cream: 2
+  output_espresso: 3

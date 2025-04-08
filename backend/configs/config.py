@@ -4,7 +4,12 @@ from typing import Optional
 import yaml
 from pydantic import BaseModel
 
-from backend.core.board_controll.caffee_controller import logger
+from backend.tools.logger import get_logger
+
+
+class BoardConfig(BaseModel):
+    output_cream: int
+    output_espresso: int
 
 
 class LoggerConfig(BaseModel):
@@ -20,6 +25,7 @@ class ApiConfig(BaseModel):
 class GlobalConfig(BaseModel):
     api: ApiConfig
     logger: LoggerConfig
+    board_config: BoardConfig
 
 
 DEFAULT_CONFIG_PATH = os.path.join("configs", "default_config.yaml")
@@ -33,6 +39,7 @@ def load_config() -> GlobalConfig:
     :return: global config with the data from yaml
     """
     global _global_config
+    logger = get_logger(__name__)
     if _global_config is None:
 
         with open(DEFAULT_CONFIG_PATH) as config_file:
@@ -42,4 +49,4 @@ def load_config() -> GlobalConfig:
         logger.setLevel(_global_config.logger.logging_level)
 
         logger.info("loaded default config")
-        return _global_config
+    return _global_config
