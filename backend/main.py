@@ -1,19 +1,28 @@
+"""
+This module initializes and runs a FastAPI server.
+
+The `run_api` function sets up the FastAPI application, configures middleware,
+includes API routes, and starts the server using Uvicorn. It also loads the
+necessary configuration for the API, such as CORS settings, host, and port.
+"""
+
 import uvicorn
 from fastapi import FastAPI, APIRouter
 from starlette.middleware.cors import CORSMiddleware
 
 from backend.api.api import api_router
-from configs.config import load_config
+from configs.config import ConfigLoader
 
 
 def run_api():
     """
-    initialize the FASTAPI server, with adding the specified parameters, and runs the api
+    Initialize the FastAPI server with specified parameters and run the API.
 
-    :returns: None
+    :return: None
     """
     app = FastAPI()
-    api_config = load_config().api
+    api_config = ConfigLoader.load_config().api
+
     app_router = APIRouter()
     app_router.include_router(api_router)
 
