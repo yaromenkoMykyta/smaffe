@@ -32,6 +32,7 @@ class Logger:
             logging.addLevelName(0, "info")
             logging.addLevelName(1, "debug")
             name = name.split(".")[-1]
+
             logging.basicConfig(
                 format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
                 level=logging.DEBUG,
