@@ -25,9 +25,13 @@ def make_espresso():
     :return: None
     """
     board_config = CONFIG.board_config  # Load the configuration for the board
-    with BoardControllerRaspberry(board_config) as board:
+
+    board = BoardControllerRaspberry(board_config)  # Initialize the board controller
+
+    LOGGER.info("started of making caffe espresso")  # Log the action
+
+    with board:
         board.set_output_high(OutputsBoard.ESPRESSO)  # Set the espresso output to HIGH
-    LOGGER.info("started make caffe espresso")  # Log the action
 
 
 def make_cream_caffe():
@@ -40,6 +44,7 @@ def make_cream_caffe():
 
     board = BoardControllerRaspberry(board_config)  # Initialize the board controller
 
+    LOGGER.info("started of making cream caffe")  # Log the action
+
     with board:
         board.set_output_high(OutputsBoard.CREAM)  # Set the cream caffe output to HIGH
-    LOGGER.info("started make cream caffe")  # Log the action
