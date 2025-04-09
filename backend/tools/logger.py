@@ -16,6 +16,7 @@ class Logger:
 
     _instance: logging.Logger = None
 
+
     @classmethod
     def get_logger(cls, name: str) -> logging.Logger:
         """
@@ -32,6 +33,7 @@ class Logger:
             logging.addLevelName(0, "info")
             logging.addLevelName(1, "debug")
             name = name.split(".")[-1]
+
             logging.basicConfig(
                 format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
                 level=logging.DEBUG,
