@@ -33,7 +33,7 @@ def make_espresso():
     with board:
         board.set_output_high(OutputsBoard.ESPRESSO)  # Set the espresso output to HIGH
 
-
+        
 def make_cream_caffe():
     """
     Prepares a cream caffe by setting the corresponding output pin to HIGH.
