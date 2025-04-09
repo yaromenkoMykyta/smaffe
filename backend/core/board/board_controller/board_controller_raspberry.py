@@ -8,7 +8,8 @@ It provides the `BoardControllerRaspberry` class, which extends the
 try:
     from RPi import GPIO
 except ImportError:
-    from Mock import GPIO
+    from backend.tools import mock_gpio as GPIO
+
 
 from backend.configs.config import BoardConfig
 from backend.core.board.board_controller.board_controller_base import (

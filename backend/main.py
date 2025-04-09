@@ -35,7 +35,6 @@ def run_api():
     )
 
     app.include_router(app_router)
-    print(f"Included routes: {app.routes}")
 
     uvicorn.run(app, host=api_config.host, port=api_config.port)
 
