@@ -1,3 +1,35 @@
-network: smaffe-network
+version: '3.8'
 
-backend:
+networks:
+  smaffe-network:
+    driver: bridge
+    name: smaffe
+
+services:
+  backend:
+    privileged: true
+    image: smaffe-backend
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - smaffe-network
+    restart: always
+    ipc: host
+    pid: host
+
+
+  frontend:
+    image: smaffe-frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - smaffe-network
+    depends_on:
+      - backend
+    restart: always
