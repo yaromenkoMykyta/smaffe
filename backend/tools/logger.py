@@ -16,6 +16,7 @@ class Logger:
 
     _instance: logging.Logger = None
 
+
     @classmethod
     def get_logger(cls, name: str) -> logging.Logger:
         """

@@ -9,8 +9,6 @@ try:
     from RPi import GPIO
 except ImportError:
     from backend.tools import mock_gpio as GPIO
-
-
 from backend.configs.config import BoardConfig
 from backend.core.board.board_controller.board_controller_base import (
     BoardControllerBase,
