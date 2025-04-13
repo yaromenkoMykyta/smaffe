@@ -8,7 +8,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 ARG platform='local'
 
 RUN if [ "$platform" = "raspberry" ] ; then \
-    pip install RPi.GPIO ; \
+    apt install -y --no-cache python3-rpi.gpio \
+    && pip install RPi.GPIO \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
     fi
 
 COPY . .
