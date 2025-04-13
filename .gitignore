@@ -173,3 +173,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Local Config
+backend/configs/app_configs/local_config.yaml
