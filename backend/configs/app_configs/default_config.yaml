@@ -1,5 +1,5 @@
 api:
-  cors_allowed_origins: ["*"] #TODO: change the allowed CORS to accept the requests only from frontend
+  cors_allowed_origins: []
   host: 0.0.0.0
   port: 8000
 

@@ -1,0 +1,7 @@
+api:
+  cors_allowed_origins: ["*"]
+  host: localhost
+
+board_config:
+  output_cream: 22
+  output_espresso: 23

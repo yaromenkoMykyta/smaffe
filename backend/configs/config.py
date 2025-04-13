@@ -8,6 +8,7 @@ to load the configuration from a YAML file.
 import os
 from typing import Optional
 
+import pydantic.v1.utils
 import yaml
 from pydantic import BaseModel
 
@@ -56,7 +57,10 @@ class ConfigLoader:
     Singleton class to manage the configuration instance.
     """
 
-    _DEFAULT_CONFIG_PATH = os.path.join("configs", "default_config.yaml")
+    _DEFAULT_CONFIG_PATHS = [
+            os.path.join("configs", "app_configs", "default_config.yaml"),
+            os.path.join("configs", "app_configs", "local_config.yaml")
+        ]
 
     _instance: Optional[GlobalConfig] = None
 
@@ -70,12 +74,24 @@ class ConfigLoader:
         :return: GlobalConfig object
         """
         logger = Logger.get_logger(__name__)
-        if cls._instance is None:
-            with open(cls._DEFAULT_CONFIG_PATH, encoding="utf-8") as config_file:
-                config = yaml.safe_load(config_file)
 
-            cls._instance = GlobalConfig.model_validate(config)
+        config_data: dict[str, any] = {}
+
+        if cls._instance is None:
+            for path in cls._DEFAULT_CONFIG_PATHS:
+                if os.path.isfile(path):
+                    logger.info("load_config %s ", path)
+                    with open(path) as file:
+                        current_config_data: dict[str, any] = yaml.safe_load(file)
+                        if current_config_data is None:
+                            continue
+                        config_data = pydantic.v1.utils.deep_update(config_data, current_config_data)
+
+                else:
+                    logger.warning("Path %s doesn't exist", path)
+            cls._instance = GlobalConfig.model_validate(config_data)
             logger.setLevel(cls._instance.logger.logging_level)
 
-            logger.info("Loaded default config")
+            logger.info("Config loaded")
+
         return cls._instance
