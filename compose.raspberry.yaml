@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  backend:
+    image: smaffe-backend:raspberry
+    build:
+      args:
+        platform: raspberry
