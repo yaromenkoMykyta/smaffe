@@ -22,7 +22,6 @@ def run_api():
     """
     app = FastAPI()
     api_config = ConfigLoader.load_config().api
-
     app_router = APIRouter()
     app_router.include_router(api_router)
 
